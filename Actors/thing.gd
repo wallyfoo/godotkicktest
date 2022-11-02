@@ -36,21 +36,23 @@ func _process(_delta):
 #			tick +=1
 		freeze = true
 	else:
-		freeze = false
-		if snap.av and !whacked:
-			print("snap override")
-			whack(snap.lv)
-			set_snap()
+		if freeze:
+			freeze = false
+			sleeping = false
+			if !whacked and snap.lv:
+				resume()
+
+
+func resume() -> void:
+	set_linear_velocity(snap.lv)
+	set_angular_velocity(snap.av)
+	set_snap()
 
 func whack(impulse: Vector2) -> void:
-	whacked = true
-	if snap.av:
-		set_linear_velocity(snap.lv)
-		set_angular_velocity(snap.av)
-	else:
-		apply_impulse(impulse, offset)
-	
+	freeze = false
+	apply_impulse(impulse, offset)
 	Signals.emit_signal("reset_slow")
+	set_snap()
 	
 
 func set_pointer(angle) -> void:

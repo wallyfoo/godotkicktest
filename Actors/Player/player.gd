@@ -59,8 +59,13 @@ func calculate_aim() -> void:
 	aim.x = Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left")
 	aim.y = Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up")
 
-	if aim != Vector2.ZERO and detected_things.size() > 0 and Globals.do_slow:
-		detected_things[0].set_pointer(aim.angle())
+	if detected_things.size() > 0 and Globals.do_slow:
+		if aim != Vector2.ZERO:
+			detected_things[0].set_pointer(aim.angle())
+		else:
+			aim = global_position.direction_to(get_global_mouse_position())
+			detected_things[0].set_pointer(aim.angle())
+		
 
 func apply_friction(_input_vector):
 	if _input_vector.x == 0 and is_on_floor():
@@ -147,6 +152,7 @@ func whack(_wm = whack_multiplier) -> void:
 				var impulse = Vector2.from_angle(rad) * _wm * multiplier
 				impulse.y *= impulse_fix_factor
 				
+				thing.whacked = true
 				thing.whack(impulse)
 				
 
