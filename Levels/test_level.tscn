@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://mj3bg38eq7ts"]
+
+[ext_resource type="PackedScene" uid="uid://2pqn2t3xmfu8" path="res://Actors/Player/player.tscn" id="1_y18cd"]
+[ext_resource type="PackedScene" uid="uid://dr5utb6w0ogxa" path="res://Actors/thing_spawner.tscn" id="2_2086i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxk13"]
+size = Vector2(1152, 64)
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+collision_layer = 3
+
+[node name="Polygon2D" type="Polygon2D" parent="Floor"]
+color = Color(0.329412, 0.254902, 0, 1)
+polygon = PackedVector2Array(0, 576, 0, 640, 1152, 640, 1152, 576)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(576, 608)
+shape = SubResource("RectangleShape2D_wxk13")
+
+[node name="Player" parent="." instance=ExtResource("1_y18cd")]
+position = Vector2(200, 520)
+
+[node name="ThingSpawner" parent="." instance=ExtResource("2_2086i")]
+position = Vector2(408, 384)

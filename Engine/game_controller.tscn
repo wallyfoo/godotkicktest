@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://fvvkxoovut40"]
+
+[ext_resource type="Script" path="res://Engine/game_controller.gd" id="1_ogboe"]
+[ext_resource type="PackedScene" uid="uid://mj3bg38eq7ts" path="res://Levels/test_level.tscn" id="1_yo5il"]
+[ext_resource type="PackedScene" uid="uid://4ogtg6ccld5r" path="res://GFX/thing_trail.tscn" id="3_ff4y7"]
+[ext_resource type="PackedScene" uid="uid://demd6kbyi6kdy" path="res://Engine/zoom_camera.tscn" id="4_8hpmf"]
+
+[node name="GameController" type="Node2D"]
+script = ExtResource("1_ogboe")
+
+[node name="TestLevel" parent="." instance=ExtResource("1_yo5il")]
+
+[node name="Things" type="Node2D" parent="."]
+
+[node name="ThingTrail" parent="." instance=ExtResource("3_ff4y7")]
+
+[node name="ZoomCamera" parent="." instance=ExtResource("4_8hpmf")]
+position_smoothing_enabled = true
+
+[node name="SlowReset" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="SlowReset" to="." method="_on_slow_reset_timeout"]

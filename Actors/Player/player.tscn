@@ -1,0 +1,170 @@
+[gd_scene load_steps=10 format=3 uid="uid://2pqn2t3xmfu8"]
+
+[ext_resource type="Script" path="res://Actors/Player/player.gd" id="1_063gw"]
+[ext_resource type="PackedScene" uid="uid://dokcejj0u7yxt" path="res://Actors/Player/timer_circle.tscn" id="2_xjccm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abupl"]
+size = Vector2(32, 80)
+
+[sub_resource type="Animation" id="Animation_ypdd2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GFX/Polygon2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0698132]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GFX/Polygon2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.77595, 2.28129)]
+}
+
+[sub_resource type="Animation" id="Animation_cqs26"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GFX/Polygon2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GFX/Polygon2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.77595, 2.28129)]
+}
+
+[sub_resource type="Animation" id="Animation_tvy1p"]
+resource_name = "jump"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GFX/Polygon2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GFX/Polygon2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 4.59479),
+"update": 0,
+"values": [Vector2(2.5, 1.36877), Vector2(1.77595, 2.28129)]
+}
+
+[sub_resource type="Animation" id="Animation_cledi"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GFX/Polygon2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0698132, 0.0, -0.0698132, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GFX/Polygon2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.77595, 2.28129), Vector2(1.9, 2), Vector2(1.77595, 2.28129), Vector2(1.9, 1.8), Vector2(1.77595, 2.28129)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qh01i"]
+_data = {
+"RESET": SubResource("Animation_ypdd2"),
+"idle": SubResource("Animation_cqs26"),
+"jump": SubResource("Animation_tvy1p"),
+"walk": SubResource("Animation_cledi")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hgyxw"]
+radius = 48.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_063gw")
+inertia = 100.0
+jump_height = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_abupl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_qh01i")
+}
+
+[node name="TimerCircle" parent="." instance=ExtResource("2_xjccm")]
+
+[node name="GFX" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="GFX"]
+position = Vector2(-4.76837e-07, 40)
+rotation = 0.0698132
+scale = Vector2(1.77595, 2.28129)
+offset = Vector2(0, -17.534)
+polygon = PackedVector2Array(-9.00926, -17.534, -9, 0, -9.00926, 17.534, 9.00926, 17.534, 9, 0, 9.00926, -17.534)
+
+[node name="ThingDetector" type="Area2D" parent="GFX"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GFX/ThingDetector"]
+position = Vector2(32, 0)
+shape = SubResource("CircleShape2D_hgyxw")
+
+[node name="TimeSlowIndicator" type="Polygon2D" parent="GFX"]
+position = Vector2(0, 8)
+polygon = PackedVector2Array(-40, -48, -40, -32, -24, -32, -24, -48)
+
+[connection signal="body_entered" from="GFX/ThingDetector" to="." method="_on_thing_detector_body_entered"]
+[connection signal="body_exited" from="GFX/ThingDetector" to="." method="_on_thing_detector_body_exited"]

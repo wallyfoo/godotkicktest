@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://4ogtg6ccld5r"]
+
+[ext_resource type="Script" path="res://GFX/thing_trail.gd" id="1_7o6jo"]
+
+[sub_resource type="Curve" id="Curve_mic04"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_3vvoi"]
+offsets = PackedFloat32Array(0, 0.487879)
+colors = PackedColorArray(1, 1, 1, 0, 0.262287, 0.510105, 1, 1)
+
+[node name="ThingTrail" type="Line2D"]
+width_curve = SubResource("Curve_mic04")
+gradient = SubResource("Gradient_3vvoi")
+joint_mode = 2
+begin_cap_mode = 2
+script = ExtResource("1_7o6jo")

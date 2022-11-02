@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwlyxqb54uiqr"]
+
+[ext_resource type="Script" path="res://Actors/thing.gd" id="1_mpneu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyww5"]
+size = Vector2(32, 32)
+
+[node name="Thing" type="RigidBody2D" groups=["pushable", "whackable"]]
+collision_layer = 2
+collision_mask = 2
+continuous_cd = 2
+max_contacts_reported = 3
+script = ExtResource("1_mpneu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yyww5")
+
+[node name="Pointer" type="Polygon2D" parent="."]
+visible = false
+color = Color(1, 0.945098, 0, 1)
+polygon = PackedVector2Array(0, -8, 0, 8, 64, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(2, 2)
+color = Color(0.258824, 0.458824, 1, 1)
+polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
