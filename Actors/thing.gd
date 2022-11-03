@@ -39,8 +39,7 @@ func _process(_delta):
 		if freeze:
 			freeze = false
 			sleeping = false
-			if !whacked and snap.lv:
-				resume()
+			resume()
 
 
 func resume() -> void:
