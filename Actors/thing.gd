@@ -12,35 +12,32 @@ var snap: Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Signals.connect("reset_slow", reset_slow)
 	Signals.connect("reset_slow", hide_pointer)
+	Signals.connect("time_slow", start_slow_snap)
 	set_snap()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-
 	Signals.emit_signal("update_thing_trail", global_position)
 	if position.y > 1000:
 		Signals.emit_signal("make_thing")
 		Signals.emit_signal("delist_thing", self)
 		queue_free()
-	
-	if Globals.do_slow:
+
+func start_slow_snap(mode) -> void:
+	$FreezeJiggle.emitting = true
+	if mode:
 		if !snap.av:
 			set_snap(get_angular_velocity(), get_linear_velocity())
-			
-#		if skip_tick == tick:
-#			freeze = false
-#			tick = 0
-#		else:
-#			freeze = true
-#			tick +=1
 		freeze = true
-	else:
-		if freeze:
-			freeze = false
-			sleeping = false
-			resume()
 
+func reset_slow() -> void:
+	$FreezeJiggle.emitting = false
+	if freeze:
+		freeze = false
+		sleeping = false
+		resume()
 
 func resume() -> void:
 	set_linear_velocity(snap.lv)
@@ -48,6 +45,7 @@ func resume() -> void:
 	set_snap()
 
 func whack(impulse: Vector2) -> void:
+	$FreezeJiggle.emitting = false
 	freeze = false
 	apply_impulse(impulse, offset)
 	Signals.emit_signal("reset_slow")

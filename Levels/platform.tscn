@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpsc2wmw3u5ap"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gmnx"]
+size = Vector2(128, 16)
+
+[node name="Platform" type="StaticBody2D"]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3gmnx")
+one_way_collision = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-64, -8, -64, 8, 64, 8, 64, -8)

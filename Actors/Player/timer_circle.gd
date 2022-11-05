@@ -14,6 +14,7 @@ func _process(_delta):
 		$TextureProgressBar.value = ($SlowDuration.time_left / $SlowDuration.wait_time) * 100
 	
 func do_slow(_mode: bool) -> void:
+	print(_mode)
 	if _mode:
 		bounce_in()
 	else:
@@ -32,6 +33,7 @@ func bounce_in() -> void:
 #	tween.tween_callback($SlowDuration.start)
 
 func bounce_out() -> void:
+	print("bouncing out")
 	tween.stop()
 	tween = create_tween()
 	tween.set_parallel(true)

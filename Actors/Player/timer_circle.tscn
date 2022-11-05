@@ -1,11 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dokcejj0u7yxt"]
+[gd_scene load_steps=5 format=3 uid="uid://dokcejj0u7yxt"]
 
 [ext_resource type="Texture2D" uid="uid://okccmxqp56di" path="res://GFX/ring_tex_under.svg" id="1_drer8"]
 [ext_resource type="Script" path="res://Actors/Player/timer_circle.gd" id="1_qxcae"]
 [ext_resource type="Texture2D" uid="uid://b5nmq73kvtlo1" path="res://GFX/ring_tex_over.svg" id="2_18e4e"]
 [ext_resource type="Texture2D" uid="uid://b72afmg8lhlbe" path="res://GFX/ring_tex_range.svg" id="3_ry2qc"]
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ww2qx"]
 
 [node name="TimerCircle" type="Node2D"]
 modulate = Color(1, 1, 1, 0)
@@ -25,11 +23,6 @@ texture_under = ExtResource("1_drer8")
 texture_over = ExtResource("2_18e4e")
 texture_progress = ExtResource("3_ry2qc")
 tint_under = Color(0, 0.658824, 1, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ww2qx")
-}
 
 [node name="SlowDuration" type="Timer" parent="."]
 wait_time = 0.4
