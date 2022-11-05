@@ -8,7 +8,9 @@ var Things : Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	@warning_ignore(return_value_discarded)
 	Signals.connect("list_thing", list_thing)
+	@warning_ignore(return_value_discarded)
 	Signals.connect("delist_thing", delist_thing)
 
 	

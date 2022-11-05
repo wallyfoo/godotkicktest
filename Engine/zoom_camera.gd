@@ -11,7 +11,7 @@ extends Camera2D
 func _ready() -> void:
 	pass
 
-func _process(delta):
+func _process(_delta):
 	global_position = Globals.player_instance.global_position
 
 #func _process(_delta):

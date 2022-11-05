@@ -12,16 +12,22 @@ var snap: Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	@warning_ignore(return_value_discarded)
 	Signals.connect("reset_slow", reset_slow)
+	@warning_ignore(return_value_discarded)
 	Signals.connect("reset_slow", hide_pointer)
+	@warning_ignore(return_value_discarded)
 	Signals.connect("time_slow", start_slow_snap)
 	set_snap()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	@warning_ignore(return_value_discarded)
 	Signals.emit_signal("update_thing_trail", global_position)
 	if position.y > 1000:
+		@warning_ignore(return_value_discarded)
 		Signals.emit_signal("make_thing")
+		@warning_ignore(return_value_discarded)
 		Signals.emit_signal("delist_thing", self)
 		queue_free()
 
@@ -48,7 +54,9 @@ func whack(impulse: Vector2) -> void:
 	$FreezeJiggle.emitting = false
 	freeze = false
 	apply_impulse(impulse, offset)
-	Signals.emit_signal("reset_slow")
+	if Globals.do_slow:
+		@warning_ignore(return_value_discarded)
+		Signals.emit_signal("reset_after_whack")
 	set_snap()
 	
 

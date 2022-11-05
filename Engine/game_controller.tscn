@@ -21,4 +21,9 @@ position_smoothing_enabled = true
 wait_time = 0.5
 one_shot = true
 
+[node name="OffScreenPositionIndicator" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-24, -24, 40, 0, -24, 24, 0, 0)
+
+[node name="TraceLine" type="Line2D" parent="."]
+
 [connection signal="timeout" from="SlowReset" to="." method="_on_slow_reset_timeout"]

@@ -6,6 +6,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	make_thing()
+	@warning_ignore(return_value_discarded)
 	Signals.connect("make_thing", make_thing)
 
 
@@ -15,4 +16,5 @@ func _ready():
 
 func make_thing() -> void:
 	var thing = Utils.instance_scene_on_main(Thing, position)
+	@warning_ignore(return_value_discarded)
 	Signals.emit_signal("list_thing", thing)

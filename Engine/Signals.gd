@@ -9,4 +9,4 @@ signal time_slow
 signal reset_slow
 signal start_reset_timer
 signal time_slow_reset_complete
-
+signal reset_after_whack

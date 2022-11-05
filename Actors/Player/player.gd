@@ -32,8 +32,10 @@ var detected_things : Array = []
 
 func _ready() -> void:
 	Globals.player_instance = self
-	Globals.Things.append(self)
+#	Globals.Things.append(self)
+	@warning_ignore(return_value_discarded)
 	Signals.connect("time_slow", time_slow_indicator_hide)
+	@warning_ignore(return_value_discarded)
 	Signals.connect("time_slow_reset_complete", time_slow_indicator_show)
 
 func _physics_process(delta):
@@ -45,6 +47,7 @@ func _physics_process(delta):
 	whack()
 	move_left_and_right(input_vector)
 	apply_friction(input_vector)
+	@warning_ignore(return_value_discarded)
 	move_and_slide()
 	check_idle(input_vector)
 	update_animations(input_vector)
