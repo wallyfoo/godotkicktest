@@ -75,3 +75,11 @@ func get_aim_radians() -> float:
 
 func set_snap(av = null, lv = null) -> void:
 	snap = {"av": av, "lv": lv}
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered():
+	Signals.emit_signal("can_see_thing", true)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	Signals.emit_signal("can_see_thing", false)

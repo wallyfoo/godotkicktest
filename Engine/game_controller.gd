@@ -13,8 +13,6 @@ var can_slow := true
 func _ready():
 	@warning_ignore(return_value_discarded)
 	Signals.connect("reset_slow", reset_slow)
-	$TraceLine.add_point(Vector2.ZERO)
-	$TraceLine.add_point(Vector2.ZERO)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -29,7 +27,6 @@ func _process(_delta):
 		set_do_slow(false)
 		
 	time_slow()
-	track_things()
 
 
 func time_slow() -> void:
@@ -57,8 +54,3 @@ func _on_slow_reset_timeout():
 	can_slow = true
 	@warning_ignore(return_value_discarded)
 	Signals.emit_signal("time_slow_reset_complete")
-
-
-func track_things() -> void:
-	$TraceLine.set_point_position(0, Globals.player_instance.global_position)
-	$TraceLine.set_point_position(1, Globals.Things[0].global_position)

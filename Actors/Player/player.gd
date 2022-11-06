@@ -131,7 +131,7 @@ func _on_thing_detector_body_entered(body):
 		detected_things.append(body)
 
 func whack(_wm = whack_multiplier) -> void:
-	if Input.is_action_just_pressed("whack") and detected_things.size() > 0:
+	if (Input.is_action_just_pressed("whack") or Input.is_action_just_released("con_time_slow")) and detected_things.size() > 0:
 		for thing in detected_things:
 			if !thing.whacked:
 				var multiplier = 1

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://fvvkxoovut40"]
+[gd_scene load_steps=6 format=3 uid="uid://fvvkxoovut40"]
 
 [ext_resource type="Script" path="res://Engine/game_controller.gd" id="1_ogboe"]
 [ext_resource type="PackedScene" uid="uid://mj3bg38eq7ts" path="res://Levels/test_level.tscn" id="1_yo5il"]
 [ext_resource type="PackedScene" uid="uid://4ogtg6ccld5r" path="res://GFX/thing_trail.tscn" id="3_ff4y7"]
 [ext_resource type="PackedScene" uid="uid://demd6kbyi6kdy" path="res://Engine/zoom_camera.tscn" id="4_8hpmf"]
+[ext_resource type="PackedScene" uid="uid://6fqbou2grwyf" path="res://Engine/off_screen_position_indicator.tscn" id="5_k50ck"]
 
 [node name="GameController" type="Node2D"]
 script = ExtResource("1_ogboe")
@@ -21,9 +22,6 @@ position_smoothing_enabled = true
 wait_time = 0.5
 one_shot = true
 
-[node name="OffScreenPositionIndicator" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-24, -24, 40, 0, -24, 24, 0, 0)
-
-[node name="TraceLine" type="Line2D" parent="."]
+[node name="OffScreenPositionIndicator" parent="." instance=ExtResource("5_k50ck")]
 
 [connection signal="timeout" from="SlowReset" to="." method="_on_slow_reset_timeout"]
