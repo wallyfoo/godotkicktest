@@ -3,5 +3,7 @@
 [ext_resource type="Script" path="res://Engine/off_screen_position_indicator.gd" id="1_3boxu"]
 
 [node name="OffScreenPositionIndicator" type="Polygon2D"]
+position = Vector2(-40, 0)
+color = Color(1, 0.427451, 0, 1)
 polygon = PackedVector2Array(-24, -24, 40, 0, -24, 24, 0, 0)
 script = ExtResource("1_3boxu")

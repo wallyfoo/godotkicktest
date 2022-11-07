@@ -24,7 +24,7 @@ shape = SubResource("RectangleShape2D_wxk13")
 position = Vector2(200, 520)
 
 [node name="ThingSpawner" parent="." instance=ExtResource("2_2086i")]
-position = Vector2(408, 384)
+position = Vector2(1112, 438)
 
 [node name="Platform" parent="." instance=ExtResource("3_uny5u")]
 position = Vector2(600, 392)

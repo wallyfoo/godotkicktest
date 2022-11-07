@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func _process(_delta):
 	global_position = Globals.player_instance.global_position
-
+	
 #func _process(_delta):
 #	if Globals.Things.size() == 0:
 #		return

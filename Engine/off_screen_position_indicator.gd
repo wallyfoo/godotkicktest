@@ -1,13 +1,10 @@
 extends Polygon2D
 
-@onready var screen_size := Vector2.ZERO
+const MARGIN := Vector2(100,100)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Signals.connect("can_see_thing", can_be_seen)
-	var screen_rect = get_viewport_rect()
-	screen_size.x = screen_rect.size.x - 100
-	screen_size.y = screen_rect.size.y - 100
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -17,8 +14,27 @@ func can_be_seen(_mode) -> void:
 	visible = !_mode
 
 func update_position() -> void:
-	look_at(Globals.Things[0].global_position)
-	global_position.x = clamp(Globals.player_instance.global_position.x + Globals.Things[0].global_position.x, (Globals.player_instance.global_position.x + screen_size.x/2 * -1), Globals.player_instance.global_position.x + screen_size.x/2)
-	global_position.y = clamp(Globals.player_instance.global_position.y + Globals.Things[0].global_position.y, Globals.player_instance.global_position.y + screen_size.y/2 * -1, Globals.player_instance.global_position.y + screen_size.y/2)
-	
+	# to find a vector pointing from a -> b, use b-a
+	if visible:
+		
+		var rect = get_viewport_rect()
+		
+		var rel = (Globals.Things[0].global_position - Globals.player_instance.global_position)
+		var quad = Vector2(sign(rel.x), sign(rel.y))
+		var extents = ((rect.size - MARGIN) / 2) * quad
 
+		
+		var m = rel.y/rel.x
+		var y = (m * extents.x)
+		var x = (extents.y/m)
+
+		
+		if abs(y) >= abs(extents.y):
+			y = m * x
+		else:
+			x = y/m
+		global_position = Globals.player_instance.global_position + Vector2(x,y)
+		look_at(Globals.Things[0].global_position)
+		
+
+#		var globalWorldMousePosition: Vector2 = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport.get_mouse_position())

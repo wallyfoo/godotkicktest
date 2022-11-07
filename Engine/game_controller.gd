@@ -13,7 +13,7 @@ var can_slow := true
 func _ready():
 	@warning_ignore(return_value_discarded)
 	Signals.connect("reset_slow", reset_slow)
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_just_pressed("time_slow") and can_slow:
@@ -27,6 +27,7 @@ func _process(_delta):
 		set_do_slow(false)
 		
 	time_slow()
+
 
 
 func time_slow() -> void:
@@ -54,3 +55,4 @@ func _on_slow_reset_timeout():
 	can_slow = true
 	@warning_ignore(return_value_discarded)
 	Signals.emit_signal("time_slow_reset_complete")
+
