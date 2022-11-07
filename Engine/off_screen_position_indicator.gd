@@ -37,10 +37,11 @@ func update_position() -> void:
 			x = y/m
 #		print("X: ",x, " Y: ", y)
 #		global_position = Globals.player_instance.global_position + Vector2(x,y)
-		position = Vector2(x,y) + (extents)
+		position = (Vector2(x,y) * quad) + (extents)
 		print("----------")
 		print(Vector2(x,y))
 		print(quad)
+		print(Vector2(x,y) * quad)
 		print(extents)
 		print(extents_dir)
 		print(position)
