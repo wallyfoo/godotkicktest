@@ -22,8 +22,6 @@ position_smoothing_enabled = true
 wait_time = 0.5
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="OffScreenPositionIndicator" parent="CanvasLayer" instance=ExtResource("5_k50ck")]
+[node name="OffScreenPositionIndicator" parent="." instance=ExtResource("5_k50ck")]
 
 [connection signal="timeout" from="SlowReset" to="." method="_on_slow_reset_timeout"]
